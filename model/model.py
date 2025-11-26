@@ -33,5 +33,6 @@ class Model:
         Restituisce tutte le Tratte (gli edges) con i corrispondenti pesi
         :return: gli edges del grafo con gli attributi (il weight)
         """
-        # TODO
 
+        self._edges = DAO.get_edges()
+        return self._edges

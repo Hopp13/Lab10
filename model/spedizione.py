@@ -22,5 +22,3 @@ class Spedizione:
 
     def __repr__(self):
         return f"{self.numero_tracking}"
-
-
