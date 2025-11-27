@@ -18,6 +18,7 @@ class Controller:
         """
         try:
             threshold = int(self._view.guadagno_medio_minimo.value)
+            print(threshold)
         except ValueError:
             self._view.show_alert("Inserisci un valore valido per il costo minimo")
         else:
@@ -30,6 +31,18 @@ class Controller:
                 num_edges = self._model.get_num_edges()
                 num_nodes = self._model.get_num_nodes()
 
-                self._view.lista_visualizzazione.append(ft.Text(f"Numero di Hub: {num_nodes}"))
-                self._view.lista_visualizzazione.append(ft.Text(f"Numero di Tratte: {num_edges}"))
+                self._view.lista_visualizzazione.controls.append(ft.Text(f"Numero di Hub: {num_nodes}"))
+                self._view.lista_visualizzazione.controls.append(ft.Text(f"Numero di Tratte: {num_edges}"))
 
+                for edge in self._model.G.edges:
+                    for node in self._model.get_all_nodes():
+                        if edge[0] == node.id:
+                            node1 = node
+                        if edge[1] == node.id:
+                            node2 = node
+                        peso = self._model.G.get_edge_data(edge[0], edge[1])["weight"]
+
+                    text = ft.Text(f"[{node1} <-> {node2}] ----- Guadagno medio: € {peso}")
+                    self._view.lista_visualizzazione.controls.append(text)
+
+        self._view.update()
