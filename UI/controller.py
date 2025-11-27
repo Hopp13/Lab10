@@ -18,7 +18,6 @@ class Controller:
         """
         try:
             threshold = int(self._view.guadagno_medio_minimo.value)
-            print(threshold)
         except ValueError:
             self._view.show_alert("Inserisci un valore valido per il costo minimo")
         else:
